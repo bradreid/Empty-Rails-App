@@ -10,10 +10,10 @@
     = yield(:head)    
     = csrf_meta_tag 
     
-%body
-  .container
+%body{:style => 'padding-top:5px'}
+  .container{:style => 'padding-top: 10px'}
     .row-fluid
-      .span12
+      .span12.border
         = render :partial => 'shared/user'
     .row-fluid
       .span12        

@@ -3,6 +3,11 @@
     Accounts
     %small
       All users who have logged in with Facebook
+      .btn-group.pull-right
+        = link_to admin_index_path, :class => 'btn' do
+          %i.icon-arrow-left
+          Back to Admin
+     
 %br
 - if @users
   = page_entries_info @users, :model => 'User' 
