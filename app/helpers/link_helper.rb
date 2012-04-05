@@ -23,7 +23,7 @@ module LinkHelper
                     }
                     
     html_options.merge!(args.second) if args.second
-    name   = html_options.delete(:name) || "Delete"
+    name   = (html_options.delete(:name) || "Delete")
     img_tg = image_tag('link_icons/delete.png', :alt => html_options[:alt_text], :title => html_options[:title], :align => 'middle').html_safe
     remote = html_options.delete(:remote)
     bttn   = html_options.delete(:button)
@@ -67,22 +67,29 @@ module LinkHelper
     a.flatten.compact.join( ' | ').html_safe
   end
   
-  def delete_link_text(context, new_opts = {}, path_opts = {})
+  def delete_link_text(context, new_opts = {}, path_opts = {})  
     opts = {:title => 'Delete', :method => :delete,
            :confirm  => "Are you sure? Clicking 'OK' will remove this record permanently!",
-           :alt_text => "Delete"}.merge(new_opts)        
-    link_to(opts[:title], polymorphic_path(context, path_opts), opts)
+           :alt_text => "Delete",
+           :class => 'btn btn-danger pull-right'}.merge(new_opts)        
+    link_to polymorphic_path(context, path_opts), opts do
+      haml_concat opts[:title]
+      haml_tag :i, :class => 'icon-remove icon-white'
+    end
   end  
   
   def view_link_text(context, new_opts = {}, path_opts = {})
-    opts = {:title => 'View'}.merge(new_opts)        
+    opts = {:title => 'View', :class => 'btn btn-success'}.merge(new_opts)        
     link_to(opts[:title], polymorphic_path(context, path_opts), opts)
   end
   
   
   def edit_link_text(context, new_opts = {}, path_opts = {})
-    opts = {:title => 'Edit'}.merge(new_opts)
-    link_to(opts[:title], edit_polymorphic_path(context, path_opts), opts)
+    opts = {:title => 'Edit', :class => 'btn btn-primary'}.merge(new_opts)
+    link_to edit_polymorphic_path(context, path_opts), opts do
+      haml_concat opts[:title]
+      haml_tag :i, :class => 'icon-edit icon-white'
+    end      
   end  
 
   
@@ -96,7 +103,11 @@ module LinkHelper
     a << [ view_link_text(context, options.merge(options[:show] || {}))] unless options[:exclude].include?(:show)
     a << [ edit_link_text(context, options.merge(options[:edit] || {}))] unless options[:exclude].include?(:edit)
     a << [ delete_link_text(context, options.merge(options[:delete] || {}))] unless options[:exclude].include?(:delete) 
-    a.flatten.compact.join( ' | ').html_safe
+    capture_haml do
+      haml_tag :div, :class => "btn-group" do
+        haml_concat a.flatten.compact.join('')
+      end
+    end
   end
   
   def exclude_actions(exclude=nil)

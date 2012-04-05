@@ -7,4 +7,4 @@
 
 = form_for [:admin, @user], :builder => AppFormBuilder do |f| 
   = render :partial => 'form', :locals => {:f => f, :text => 'Update User!'}
-  =link_to "Cancel", admin_users_path, :class => 'btn error'
+  =link_to "Cancel", admin_users_path, :class => 'btn btn-danger'

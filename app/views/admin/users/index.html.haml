@@ -7,17 +7,16 @@
 - if @users
   = page_entries_info @users, :model => 'User' 
 %br
-%table.table.table-striped
+%table.table.table-striped.table-bordered
   %thead
     %tr
       %th
-        Avatar
+      %th
+        Display Name
       %th
         Active?
       %th
         Admin?
-      %th
-        Display Name
       %th
         Email
       %th
@@ -27,21 +26,22 @@
   %tbody
     -@users.each do |u|
       %tr
+        %td{:style => 'text-align:center'}
+          =image_tag(u.facebook_avatar_url) if u.facebook_avatar_url 
         %td
-          =image_tag(u.facebook_avatar_url) if u.facebook_avatar_url     
+          =u.display_name              
         %td
           =status_image u.active?
         %td
-          =status_image u.admin?          
-        %td
-          =u.display_name
+          =status_image u.admin?, ['Yes', 'No']         
         %td
           =u.email
         %td
           =u.created_at.to_formatted_s(:short_with_year)
         %td
           %span{:style => 'white-space: nowrap'}
-            =action_images [:admin, u], :exclude => [:index, :show], :delete => {:title => 'Inactivate', :alt_text => 'Inactivate', :confirm => 'Are you sure you want to inactivate this user'}
+            =action_links [:admin, u], :exclude => [:index, :show], :delete => {:title => 'Inactivate', :alt_text => 'Inactivate', :confirm => 'Are you sure you want to inactivate this user'}
+    -if @users.total_pages > 1
       %tr
-    %td{:colspan => 7}
-      = will_paginate @users, :renderer => 'WillPaginateHelper::LinkRenderer'          
+        %td{:colspan => 7}
+          = will_paginate @users, :renderer => 'WillPaginateHelper::LinkRenderer'          

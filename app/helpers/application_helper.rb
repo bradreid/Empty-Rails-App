@@ -1,16 +1,12 @@
 module ApplicationHelper
-  def status_image(status)
-    image = "link_icons/cross.png"
-    if status.is_a? TrueClass
-      image = "link_icons/tick.png" if status
+  def status_image(bool, labels = ['Active', 'Inactive'])
+    if bool
+      html_class = "label label-success"
+      html_label = labels[0]
     else
-      case status
-      when String
-        image = "link_icons/tick.png" if status.downcase == 'active'
-      else
-        image = "link_icons/tick.png" if status
-      end
+      html_class = "label label-important"
+      html_label = labels[1]
     end
-    image_tag image
+    content_tag("span", html_label, :class => html_class)    
   end  
 end
