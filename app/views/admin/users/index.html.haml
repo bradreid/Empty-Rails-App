@@ -15,7 +15,7 @@
   %thead
     %tr
       %th
-        ID
+        Avatar
       %th
         Active
       %th
@@ -32,7 +32,7 @@
     -@users.each do |u|
       %tr
         %td
-          =u.id      
+          =image_tag(u.facebook_avatar_url) if u.facebook_avatar_url     
         %td
           =status_image u.active?
         %td
@@ -45,7 +45,7 @@
           =u.created_at.to_formatted_s(:short_with_year)
         %td
           %span{:style => 'white-space: nowrap'}
-            =#action_images [:admin, u], :exclude => [:index], :delete => {:title => 'Inactivate', :alt_text => 'Inactivate', :confirm => 'Are you sure you want to inactivate this user'}
+            =action_images [:admin, u], :exclude => [:index], :delete => {:title => 'Inactivate', :alt_text => 'Inactivate', :confirm => 'Are you sure you want to inactivate this user'}
       %tr
     %td{:colspan => 5}
       = will_paginate @users, :renderer => 'WillPaginateHelper::LinkRenderer'          

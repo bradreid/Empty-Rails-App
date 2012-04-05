@@ -1,2 +1,6 @@
 %h1
   Do some stuff here
+  
+-if current_user
+  =image_tag(current_user.facebook_avatar_url) if current_user.facebook_avatar_url
+  ="Hello #{current_user.display_name}"
