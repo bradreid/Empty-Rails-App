@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name, :admin, :active
 
 
   def display_name

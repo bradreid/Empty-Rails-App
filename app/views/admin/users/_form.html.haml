@@ -1,0 +1,23 @@
+= f.error_messages
+
+
+%table{:border => 0, :width => '100%'}
+  %tr
+    %td{:width => '50%', :valign => 'top'}
+      -if current_user.try(:admin?)
+        %br
+        Admin?
+        %br
+        =f.check_box :admin
+
+        %br
+        Active?
+        %br
+        =f.check_box :active    
+        %br
+        %br
+        %br
+
+    
+ 
+= f.submit text, :class => 'btn primary'

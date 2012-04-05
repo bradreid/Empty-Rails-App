@@ -18,8 +18,11 @@ Devise.setup do |config|
   # available as additional gems.
   require 'devise/orm/active_record'
     
-    
-  config.omniauth :facebook, '349934338385564', '1b87169c3e62a7b391ea9aadf469b5bc'   
+  if Rails.env == 'production'
+    config.omniauth :facebook, '349934338385564', '1b87169c3e62a7b391ea9aadf469b5bc'
+  else
+    config.omniauth :facebook, '250979434997299', '980739abfed7ad5e2b8a908811f74aaa'
+  end     
 
   # ==> Configuration for any authentication mechanism
   # Configure which keys are used when authenticating a user. The default is

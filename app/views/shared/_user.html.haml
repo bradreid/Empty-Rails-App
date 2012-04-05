@@ -1,7 +1,7 @@
 #user_bar
   -if defined? current_user    
-    -if current_user     
-      = #link_to("Hello #{current_user.username}! ", edit_user_registration_path)
+    -if current_user.try(:admin?)
+      =link_to 'Admin', admin_index_path
       &nbsp;
       &nbsp;
       = link_to('Logout', destroy_user_session_path)

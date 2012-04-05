@@ -41,7 +41,7 @@
           =u.created_at.to_formatted_s(:short_with_year)
         %td
           %span{:style => 'white-space: nowrap'}
-            =action_images [:admin, u], :exclude => [:index], :delete => {:title => 'Inactivate', :alt_text => 'Inactivate', :confirm => 'Are you sure you want to inactivate this user'}
+            =action_images [:admin, u], :exclude => [:index, :show], :delete => {:title => 'Inactivate', :alt_text => 'Inactivate', :confirm => 'Are you sure you want to inactivate this user'}
       %tr
     %td{:colspan => 7}
       = will_paginate @users, :renderer => 'WillPaginateHelper::LinkRenderer'          
