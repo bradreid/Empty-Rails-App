@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :first_name, :last_name
 
 
   def display_name
@@ -27,6 +27,7 @@ private
     data = access_token.extra.raw_info
     if user = User.where(:email => data.email).first
       user.update_attribute(:facebook_id, data[:id]) if data[:id].present?
+      user.update_attributes(:first_name => data[:first_name], :last_name => data[:last_name])
       user
     else # Create a user with a stub password. 
       User.create!(:email => data.email, :password => Devise.friendly_token[0,20]) 

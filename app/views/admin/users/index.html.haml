@@ -11,19 +11,19 @@
 - if @users
   = page_entries_info @users, :model => 'User' 
 %br
-%table#search_results.data
+%table.table.table-striped
   %thead
     %tr
       %th
         Avatar
       %th
-        Active
+        Active?
+      %th
+        Admin?
       %th
         Display Name
       %th
         Email
-      %th
-        Admin?
       %th
         Created at
       %th
@@ -36,16 +36,16 @@
         %td
           =status_image u.active?
         %td
+          =status_image u.admin?          
+        %td
           =u.display_name
         %td
           =u.email
-        %td
-          =status_image u.admin?
         %td
           =u.created_at.to_formatted_s(:short_with_year)
         %td
           %span{:style => 'white-space: nowrap'}
             =action_images [:admin, u], :exclude => [:index], :delete => {:title => 'Inactivate', :alt_text => 'Inactivate', :confirm => 'Are you sure you want to inactivate this user'}
       %tr
-    %td{:colspan => 5}
+    %td{:colspan => 7}
       = will_paginate @users, :renderer => 'WillPaginateHelper::LinkRenderer'          
