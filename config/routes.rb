@@ -1,5 +1,10 @@
 FacebookAuth::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
+  
+  namespace :admin do
+    resources :users
+  end
+  resources :admin  
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

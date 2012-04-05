@@ -13,6 +13,7 @@ gem 'omniauth-facebook'
 gem 'nifty-generators' #Just to create a basic layout
 gem 'haml'
 gem "twitter-bootstrap-rails"
+gem 'will_paginate'
 
 
 # Gems used only for assets and not required

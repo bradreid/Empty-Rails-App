@@ -1,0 +1,51 @@
+.page-header
+  %h1
+    Accounts
+    %small
+      All users with login credentials
+      
+
+= link_to "Create a new user", new_admin_user_path, :class => 'btn primary'
+%br
+%br
+- if @users
+  = page_entries_info @users, :model => 'User' 
+%br
+%table#search_results.data
+  %thead
+    %tr
+      %th
+        ID
+      %th
+        Active
+      %th
+        Display Name
+      %th
+        Email
+      %th
+        Admin?
+      %th
+        Created at
+      %th
+        Actions
+  %tbody
+    -@users.each do |u|
+      %tr
+        %td
+          =u.id      
+        %td
+          =status_image u.active?
+        %td
+          =u.display_name
+        %td
+          =u.email
+        %td
+          =status_image u.admin?
+        %td
+          =u.created_at.to_formatted_s(:short_with_year)
+        %td
+          %span{:style => 'white-space: nowrap'}
+            =#action_images [:admin, u], :exclude => [:index], :delete => {:title => 'Inactivate', :alt_text => 'Inactivate', :confirm => 'Are you sure you want to inactivate this user'}
+      %tr
+    %td{:colspan => 5}
+      = will_paginate @users, :renderer => 'WillPaginateHelper::LinkRenderer'          
