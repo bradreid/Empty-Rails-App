@@ -2,11 +2,7 @@
   %h1
     Accounts
     %small
-      All users with login credentials
-      
-
-= link_to "Create a new user", new_admin_user_path, :class => 'btn primary'
-%br
+      All users who have authenticated with Facebook
 %br
 - if @users
   = page_entries_info @users, :model => 'User' 
