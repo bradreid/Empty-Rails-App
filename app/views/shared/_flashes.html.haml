@@ -1,0 +1,15 @@
+#flashes
+  - if !flash[:notice].blank?
+    .alert.alert-success
+      =link_to 'x', '#', :class => 'close'
+      = flash[:notice]
+
+  - if !flash[:error].blank?
+    .alert.alert-error
+      =link_to 'x', '#', :class => 'close'
+      = flash[:error]
+        
+  - if !flash[:warn].blank?
+    .alert.alert-info
+      =link_to 'x', '#', :class => 'close'
+      = flash[:warn]      

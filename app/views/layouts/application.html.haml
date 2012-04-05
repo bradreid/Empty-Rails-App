@@ -1,0 +1,23 @@
+
+!!!
+%html
+  %head
+    %title
+      The Choice Matrix
+    %meta{:name => 'description', :content => 'The Choice Matrix'}
+    = stylesheet_link_tag :application   
+    = javascript_include_tag :application
+    = yield(:head)    
+    = csrf_meta_tag 
+    
+%body
+  .container
+    .row-fluid
+      .span12
+        = render :partial => 'shared/user'
+    .row-fluid
+      .span12        
+        = render :partial => 'shared/flashes'
+    .row-fluid
+      .span12        
+        = yield 
