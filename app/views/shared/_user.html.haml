@@ -1,7 +1,9 @@
 #user_bar
   -if defined? current_user    
     -if current_user.try(:admin?)
+      =link_to(image_tag(current_user.facebook_avatar_url, :height => 25, :width => 25), user_path(current_user)) if current_user.facebook_avatar_url
       &nbsp;
+      = link_to('My Page', user_path(current_user))
       &nbsp;
       = link_to('Logout', destroy_user_session_path)
     -else  
